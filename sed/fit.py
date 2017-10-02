@@ -4,7 +4,7 @@ Fit SED models to observed data using various approaches.
 """
 import logging
 import sys
-import pyfits
+import astropy.io.fits as pf
 import itertools
 import re
 import copy
@@ -53,7 +53,7 @@ def get_PCA_grid(colors,res=3,teffrange=(-np.inf,np.inf),loggrange=(-np.inf,np.i
     """
     #-- read in the color parameters from the FITS file
     gridfile = model.get_file(integrated=True,**kwargs)
-    ff = pyfits.open(gridfile)
+    ff = pf.open(gridfile)
     ext = ff[1]
     
     teff = ext.data.field('teff')
@@ -1234,7 +1234,7 @@ if __name__=="__main__":
     
     
     sys.exit()
-    from ivs.misc import loggers
+    from ivs.aux import loggers
     from pylab import *
     from numpy import *
     logger = loggers.get_basic_logger()
